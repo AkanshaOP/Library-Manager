@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Library Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="images/logo.png" alt="Library Logo">
+                    <h1>Campus Library</h1>
+                </div>
+                <div class="search-bar">
+                    <input type="text" placeholder="Search for books, authors, topics...">
+                    <button>🔍</button>
+                </div>
+                <div class="nav-buttons">
+                    <button id="loginBtn">Login</button>
+                    <button id="signupBtn">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <img src="images/one.jpeg" alt="Library Interior" class="hero-image">
+        <div class="hero-content">
+            <h2>Discover, Learn & Imagine</h2>
+            <p>Access thousands of books, journals, and digital resources at your fingertips. Your gateway to knowledge and academic excellence.</p>
+            <button class="cta-button">Explore Collection</button>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-value">12,500+</div>
+                <div class="stat-label">Books in Collection</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4,200+</div>
+                <div class="stat-label">E-Books Available</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">3,800+</div>
+                <div class="stat-label">Active Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">250+</div>
+                <div class="stat-label">New Arrivals</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <!-- Sidebar Navigation -->
+            <div class="sidebar">
+                <h3>Navigation</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active">📚 Dashboard</a></li>
+                    <li><a href="#">🔍 Browse Catalog</a></li>
+                    <li><a href="#">📖 My Borrowed Books</a></li>
+                    <li><a href="#">📅 Reservations</a></li>
+                    <li><a href="#">📋 Reading Lists</a></li>
+                    <li><a href="#">📱 Digital Resources</a></li>
+                    <li><a href="#">⚙️ Account Settings</a></li>
+                    <li><a href="#">📞 Help & Support</a></li>
+                </ul>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="main-content">
+                <div class="section-title">
+                    <h3>Featured Books</h3>
+                    <button id="addBookBtn">+ Add New Book</button>
+                </div>
+
+                <div class="book-grid">
+                    <!-- Book 1 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="images/book1.jpeg" alt="">
+                        </div>
+                        <div class="book-details">
+                            <h4>Data Structures & Algorithms</h4>
+                            <p>Author: John Smith</p>
+                            <p>Category: Computer Science</p>
+                            <div class="book-status">
+                                <span class="status-badge">Available</span>
+                                <button class="borrow-btn">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 2 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="/api/placeholder/200/250" alt="Book Cover">
+                        </div>
+                        <div class="book-details">
+                            <h4>Introduction to Physics</h4>
+                            <p>Author: Robert Johnson</p>
+                            <p>Category: Physics</p>
+                            <div class="book-status">
+                                <span class="status-badge">Available</span>
+                                <button class="borrow-btn">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 3 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="/api/placeholder/200/250" alt="Book Cover">
+                        </div>
+                        <div class="book-details">
+                            <h4>Organic Chemistry</h4>
+                            <p>Author: Emily Davis</p>
+                            <p>Category: Chemistry</p>
+                            <div class="book-status">
+                                <span class="status-badge unavailable">Borrowed</span>
+                                <button class="borrow-btn" disabled>Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 4 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="/api/placeholder/200/250" alt="Book Cover">
+                        </div>
+                        <div class="book-details">
+                            <h4>The Art of Literature</h4>
+                            <p>Author: Michael Wilson</p>
+                            <p>Category: Literature</p>
+                            <div class="book-status">
+                                <span class="status-badge">Available</span>
+                                <button class="borrow-btn">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 5 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="/api/placeholder/200/250" alt="Book Cover">
+                        </div>
+                        <div class="book-details">
+                            <h4>Modern Economics</h4>
+                            <p>Author: Sarah Brown</p>
+                            <p>Category: Economics</p>
+                            <div class="book-status">
+                                <span class="status-badge">Available</span>
+                                <button class="borrow-btn">Borrow</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Book 6 -->
+                    <div class="book-card">
+                        <div class="book-image">
+                            <img src="/api/placeholder/200/250" alt="Book Cover">
+                        </div>
+                        <div class="book-details">
+                            <h4>Introduction to Psychology</h4>
+                            <p>Author: David Miller</p>
+                            <p>Category: Psychology</p>
+                            <div class="book-status">
+                                <span class="status-badge unavailable">Borrowed</span>
+                                <button class="borrow-btn" disabled>Reserve</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Adding Books -->
+    <div id="bookModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Book</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="addBookForm">
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" id="author" name="author" required>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="Computer Science">Computer Science</option>
+                        <option value="Physics">Physics</option>
+                        <option value="Chemistry">Chemistry</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Literature">Literature</option>
+                        <option value="Economics">Economics</option>
+                        <option value="Psychology">Psychology</option>
+                        <option value="History">History</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" id="isbn" name="isbn" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="copies">Number of Copies</label>
+                    <input type="number" id="copies" name="copies" min="1" value="1" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Add Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Login to Your Account</h3>
+                <span class="close">&times;</span>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username or Email</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" id="cancelLoginBtn">Cancel</button>
+                    <button type="submit" class="submit-btn">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+  
+    <script src="script1.js"></script>
+   </body>
+   </html>

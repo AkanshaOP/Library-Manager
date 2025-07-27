@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Our Collection | City Library</title>
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #9014a1;
+            --accent: #e63946;
+            --light: #cc84dc;
+            --dark: #000000;
+            --gray: #cb8ace;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--gray);
+        }
+        
+        .user-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-actions a {
+            color: white;
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: color 0.3s;
+        }
+        
+        .user-actions a:hover {
+            color: var(--gray);
+        }
+        
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #d62b3a;
+        }
+        
+        main {
+            padding: 2rem 0;
+        }
+        
+        .page-title {
+            margin-bottom: 1rem;
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .book-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .book-cover {
+            height: 300px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .book-info {
+            padding: 1rem;
+        }
+        
+        .book-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-author {
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-category {
+            display: inline-block;
+            background-color: var(--gray);
+            color: var(--dark);
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .book-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        
+        .status-badge {
+            font-size: 0.8rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .available {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .borrowed {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .pagination button {
+            background-color: white;
+            border: 1px solid #ddd;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .pagination button:hover, .pagination button.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .collection-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--secondary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* No results message */
+        .no-results {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+   
+
+    <main class="container">
+        <h1 class="page-title">Explore Our Collection</h1>
+        
+        <div class="filters">
+            <div class="filter-group">
+                <label for="search">Search:</label>
+                <input type="text" id="search" placeholder="Search by title, author or keyword...">
+            </div>
+            <div class="filter-group">
+                <label for="category">Category:</label>
+                <select id="category">
+                    <option value="">All Categories</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="mystery">Mystery</option>
+                    <option value="sci-fi">Science Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="biography">Biography</option>
+                    <option value="history">History</option>
+                    <option value="science">Science</option>
+                    <option value="self-help">Self-Help</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="availability">Availability:</label>
+                <select id="availability">
+                    <option value="">All</option>
+                    <option value="available">Available Now</option>
+                    <option value="borrowed">Borrowed</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="sort">Sort By:</label>
+                <select id="sort">
+                    <option value="newest">Newest Additions</option>
+                    <option value="title">Title (A-Z)</option>
+                    <option value="author">Author (A-Z)</option>
+                    <option value="popular">Most Popular</option>
+                </select>
+            </div>
+        </div>
+        
+        <button class="btn btn-primary" id="search-btn">Apply Filters</button>
+        
+        <div class="loading" id="loading">
+            <div class="loading-spinner"></div>
+            <p>Loading books...</p>
+        </div>
+        
+        <div class="no-results" id="no-results">
+            <h3>No books found</h3>
+            <p>Try adjusting your search criteria</p>
+        </div>
+        
+        <div class="collection-grid" id="collection-grid">
+            <!-- Books will be loaded here by JavaScript -->
+        </div>
+        
+        <div class="pagination" id="pagination">
+            <button data-page="1" class="active">1</button>
+            <button data-page="2">2</button>
+            <button data-page="3">3</button>
+            <button data-page="next">Next →</button>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About City Library</h3>
+                    <p>Your community hub for learning, discovery, and connection. Open 7 days a week to serve all readers.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="membership.html">Become a Member</a></li>
+                        <li><a href="donate.html">Donate Books</a></li>
+                        <li><a href="volunteer.html">Volunteer</a></li>
+                        <li><a href="faq.html">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>123 Reading Street<br>Booktown, BT1 2LB<br>Phone: (555) 123-4567<br>Email: info@citylibrary.org</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Hours</h3>
+                    <p>Monday-Friday: 9am - 8pm<br>Saturday: 10am - 6pm<br>Sunday: 12pm - 5pm</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 City Library. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample book data - In a real application, this would come from a database
+        const booksData = [
+            {
+                id: 1,
+                title: "The Midnight Library",
+                author: "Matt Haig",
+                category: "fiction",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-01-15"
+            },
+            {
+                id: 2,
+                title: "Atomic Habits",
+                author: "James Clear",
+                category: "self-help",
+                coverUrl: "/api/placeholder/250/300",
+                status: "borrowed",
+                dateAdded: "2025-01-20"
+            },
+            {
+                id: 3,
+                title: "The Invisible Life of Addie LaRue",
+                author: "V.E. Schwab",
+                category: "fantasy",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-01"
+            },
+            {
+                id: 4,
+                title: "Project Hail Mary",
+                author: "Andy Weir",
+                category: "sci-fi",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-10"
+            },
+            {
+                id: 5,
+                title: "The Code Breaker",
+                author: "Walter Isaacson",
+                category: "biography",
+                coverUrl: "/api/placeholder/250/300",
+                status: "borrowed",
+                dateAdded: "2025-01-25"
+            },
+            {
+                id: 6,
+                title: "The Four Winds",
+                author: "Kristin Hannah",
+                category: "fiction",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-15"
+            },
+            {
+                id: 7,
+                title: "The Personal Librarian",
+                author: "Marie Benedict",
+                category: "historical-fiction",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-05"
+            },
+            {
+                id: 8,
+                title: "Think Again",
+                author: "Adam Grant",
+                category: "non-fiction",
+                coverUrl: "/api/placeholder/250/300",
+                status: "borrowed",
+                dateAdded: "2025-01-18"
+            },
+            {
+                id: 9,
+                title: "The Thursday Murder Club",
+                author: "Richard Osman",
+                category: "mystery",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-22"
+            },
+            {
+                id: 10,
+                title: "Klara and the Sun",
+                author: "Kazuo Ishiguro",
+                category: "sci-fi",
+                coverUrl: "/api/placeholder/250/300",
+                status: "borrowed",
+                dateAdded: "2025-01-30"
+            },
+            {
+                id: 11,
+                title: "The Premonition",
+                author: "Michael Lewis",
+                category: "non-fiction",
+                coverUrl: "/api/placeholder/250/300", 
+                status: "available",
+                dateAdded: "2025-02-18"
+            },
+            {
+                id: 12,
+                title: "Empire of Pain",
+                author: "Patrick Radden Keefe",
+                category: "history",
+                coverUrl: "/api/placeholder/250/300",
+                status: "available",
+                dateAdded: "2025-02-25"
+            }
+        ];
+        
+        // DOM elements
+        const collectionGrid = document.getElementById('collection-grid');
+        const searchInput = document.getElementById('search');
+        const categorySelect = document.getElementById('category');
+        const availabilitySelect = document.getElementById('availability');
+        const sortSelect = document.getElementById('sort');
+        const searchBtn = document.getElementById('search-btn');
+        const loadingElement = document.getElementById('loading');
+        const noResultsElement = document.getElementById('no-results');
+        const paginationElement = document.getElementById('pagination');
+        
+        // Current page and books per page
+        let currentPage = 1;
+        const booksPerPage = 8;
+        
+        // Function to filter books based on search criteria
+        function filterBooks() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const category = categorySelect.value;
+            const availability = availabilitySelect.value;
+            
+            return booksData.filter(book => {
+                // Filter by search term
+                const matchesSearch = 
+                    book.title.toLowerCase().includes(searchTerm) || 
+                    book.author.toLowerCase().includes(searchTerm);
+                
+                // Filter by category
+                const matchesCategory = category === '' || book.category === category;
+                
+                // Filter by availability
+                const matchesAvailability = 
+                    availability === '' || 
+                    (availability === 'available' && book.status === 'available') ||
+                    (availability === 'borrowed' && book.status === 'borrowed');
+                
+                return matchesSearch && matchesCategory && matchesAvailability;
+            });
+        }
+        
+        // Function to sort books
+        function sortBooks(books) {
+            const sortBy = sortSelect.value;
+            
+            return [...books].sort((a, b) => {
+                switch(sortBy) {
+                    case 'newest':
+                        return new Date(b.dateAdded) - new Date(a.dateAdded);
+                    case 'title':
+                        return a.title.localeCompare(b.title);
+                    case 'author':
+                        return a.author.localeCompare(b.author);
+                    case 'popular':
+                        // This would typically be based on a popularity metric
+                        // For now, just using random values for demonstration
+                        return Math.random() - 0.5;
+                    default:
+                        return 0;
+                }
+            });
+        }
+        
+        // Function to display books
+        function displayBooks() {
+            // Show loading indicator
+            loadingElement.style.display = 'block';
+            collectionGrid.style.display = 'none';
+            noResultsElement.style.display = 'none';
+            
+            // Simulate loading delay
+            setTimeout(() => {
+                // Filter and sort books
+                const filteredBooks = filterBooks();
+                const sortedBooks = sortBooks(filteredBooks);
+                
+                // Pagination
+                const startIndex = (currentPage - 1) * booksPerPage;
+                const endIndex = startIndex + booksPerPage;
+                const booksToShow = sortedBooks.slice(startIndex, endIndex);
+                
+                // Update pagination controls
+                updatePagination(sortedBooks.length);
+                
+                // Clear previous books
+                collectionGrid.innerHTML = '';
+                
+                // Check if there are any books to display
+                if (booksToShow.length === 0) {
+                    noResultsElement.style.display = 'block';
+                    loadingElement.style.display = 'none';
+                    collectionGrid.style.display = 'none';
+                    return;
+                }
+                
+                // Display books
+                booksToShow.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    
+                    bookCard.innerHTML = `
+                        <div class="book-cover">
+                            <img src="${book.coverUrl}" alt="${book.title} cover">
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">by ${book.author}</p>
+                            <span class="book-category">${book.category.replace('-', ' ')}</span>
+                            <div class="book-status">
+                                <span class="status-badge ${book.status}">${book.status}</span>
+                                <a href="book-details.html?id=${book.id}" class="btn btn-primary">Details</a>
+                            </div>
+                        </div>
+                    `;
+                    
+                    collectionGrid.appendChild(bookCard);
+                });
+                
+                // Hide loading indicator and show grid
+                loadingElement.style.display = 'none';
+                collectionGrid.style.display = 'grid';
+                
+            }, 500); // Simulate server delay
+        }
+        
+        // Function to update pagination controls
+        function updatePagination(totalBooks) {
+            const totalPages = Math.ceil(totalBooks / booksPerPage);
+            
+            // Clear previous pagination
+            paginationElement.innerHTML = '';
+            
+            // No need for pagination if there's only one page or no books
+            if (totalPages <= 1) {
+                paginationElement.style.display = 'none';
+                return;
+            }
+            
+            paginationElement.style.display = 'flex';
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.textContent = '← Previous';
+                prevButton.setAttribute('data-page', 'prev');
+                paginationElement.appendChild(prevButton);
+            }
+            
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                if (totalPages > 5) {
+                    // Show first page, current page, and last page with ellipsis
+                    if (i === 1 || i === totalPages || (i >= currentPage - 1 && i <= currentPage + 1)) {
+                        const pageButton = document.createElement('button');
+                        pageButton.textContent = i;
+                        pageButton.setAttribute('data-page', i);
+                        if (i === currentPage) {
+                            pageButton.classList.add('active');
+                        }
+                        paginationElement.appendChild(pageButton);
+                    } else if (i === 2 && currentPage > 3) {
+                        const ellipsis = document.createElement('span');
+                        ellipsis.textContent = '...';
+                        ellipsis.className = 'ellipsis';
+                        paginationElement.appendChild(ellipsis);
+                    } else if (i === totalPages - 1 && currentPage < totalPages - 2) {
+                        const ellipsis = document.createElement('span');
+                        ellipsis.textContent = '...';
+                        ellipsis.className = 'ellipsis';
+                        paginationElement.appendChild(ellipsis);
+                    }
+                } else {
+                    // Show all pages if total pages are 5 or less
+                    const pageButton = document.createElement('button');
+                    pageButton.textContent = i;
+                    pageButton.setAttribute('data-page', i);
+                    if (i === currentPage) {
+                        pageButton.classList.add('active');
+                    }
+                    paginationElement.appendChild(pageButton);
+                }
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                const nextButton = document.createElement('button');
+                nextButton.textContent = 'Next →';
+                nextButton.setAttribute('data-page', 'next');
+                paginationElement.appendChild(nextButton);
+            }
+        }
+        
+        // Event Listeners
+        
+        // Search button click
+        searchBtn.addEventListener('click', () => {
+            currentPage = 1;
+            displayBooks();
+        });
+        
+        // Enter key in search input
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                currentPage = 1;
+                displayBooks();
+            }
+        });
+        
+        // Pagination clicks
+        paginationElement.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+                const page = e.target.getAttribute('data-page');
+                
+                if (page === 'prev') {
+                    currentPage--;
+                } else if (page === 'next') {
+                    currentPage++;
+                } else {
+                    currentPage = parseInt(page);
+                }
+                
+                displayBooks();
+                
+                // Scroll to top of collection
+                collectionGrid.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+        
+        // Initial display of books
+        document.addEventListener('DOMContentLoaded', displayBooks);
+    </script>
+</body>
+</html>
